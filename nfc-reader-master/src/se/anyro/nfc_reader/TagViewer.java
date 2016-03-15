@@ -145,8 +145,10 @@ public class TagViewer extends Activity {
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
                 || NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)
                 || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
+        	//获取NDEF数据
             Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
             NdefMessage[] msgs;
+            //解析数据
             if (rawMsgs != null) {
                 msgs = new NdefMessage[rawMsgs.length];
                 for (int i = 0; i < rawMsgs.length; i++) {
@@ -270,6 +272,10 @@ public class TagViewer extends Activity {
         return result;
     }
 
+    /**
+     * 在界面中展示Tag的数据
+     * @param msgs
+     */
     void buildTagViews(NdefMessage[] msgs) {
         if (msgs == null || msgs.length == 0) {
             return;
